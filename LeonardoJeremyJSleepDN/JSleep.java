@@ -64,26 +64,26 @@ public class JSleep
         if(discountPercentage > 100){
             return 0;
         }
-        return price * (1 - discountPercentage / 100);
+        return price * (int)(1 - discountPercentage / 100);
     }
     
     public int getOriginalPrice(int discountedPrice, float discountPercentage){
-        return discountedPrice / (discountPercentage / 100)
+        return discountedPrice / (int)(discountPercentage / 100);
         }
     
     public float getAdminFeePercentage(){
-        return 0.05;
+        return (float)0.05;
     }
     
     public int getAdminFee(int price){
         float percentage = getAdminFeePercentage();
-        return price * percentage;
+        return price * (int)percentage;
     }
     
     public int getTotalPrice(int price, int numberOfNight){
         price *= numberOfNight;
         float adminFee = getAdminFee(price);
-        return price + adminFee;
+        return (int)(price + adminFee);
     }
     
 }
