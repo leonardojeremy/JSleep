@@ -11,18 +11,18 @@ public class JSleep
         System.out.println("Hotel ID   : " + getHotelID());
         System.out.println("Hotel Name : " + getHotelName());
         System.out.println("Discount   : " + isDiscount());
-        float discountPercentage = getDiscountPercentage(1000, 800);
+        float discountPercentage = getDiscountPercentage(2000, 1000);
         System.out.println("Discount Percenteage : " + discountPercentage);
         
-        int price = 1500;
-        int discountedPrice = getDiscountedPrice(price, discountPercentage);
+        int price = 2000;
+        price = getDiscountedPrice(price, discountPercentage);
         
         System.out.println("Original Price : " + getOriginalPrice(price, discountPercentage));
-        
+        System.out.println("Disc Price : " + price);
         int adminFee = getAdminFee(price);
         
         int totalPrice = getTotalPrice(price, 5);
-        
+        System.out.println("Admin Fee : " + adminFee);
         System.out.println("Total Price : " + totalPrice);
     }
     
@@ -42,18 +42,23 @@ public class JSleep
         if(beforeDiscount < afterDiscount){
             return 0;
         }
-        return (1 - afterDiscount / beforeDiscount) * 100;
+        else{
+            return (1-((float)afterDiscount / (float)beforeDiscount)) * 100;
+        }
     }
     
     public static int getDiscountedPrice(int price, float discountPercentage){
         if(discountPercentage > 100){
             return 0;
         }
-        return price * (int)(1 - discountPercentage / 100);
+        else{
+            return (int)(price * (1.0 - (discountPercentage / 100)));
+        }
+        
     }
     
     public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-        return discountedPrice / (int)(discountPercentage / 100);
+        return (int)((float)discountedPrice / (discountPercentage / 100));
         }
     
     public static float getAdminFeePercentage(){
@@ -62,13 +67,13 @@ public class JSleep
     
     public static int getAdminFee(int price){
         float percentage = getAdminFeePercentage();
-        return price * (int)percentage;
+        return (int)((float)price * percentage);
     }
     
     public static int getTotalPrice(int price, int numberOfNight){
         price *= numberOfNight;
-        float adminFee = getAdminFee(price);
-        return (int)(price + adminFee);
+        float adminFee = (float)(getAdminFee(price));
+        return price + (int)adminFee;
     }
     
 }
