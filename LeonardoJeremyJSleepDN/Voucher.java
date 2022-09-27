@@ -1,8 +1,9 @@
 package LeonardoJeremyJSleepDN;
 
-public class Voucher
+public class Voucher extends Serializable
 {
-    public Voucher(String name, int code, Type type, double minimum, double cut){
+    public Voucher(int id, String name, int code, Type type, boolean used, double minimum, double cut){
+        super(id);
         this.name = name;
         this.code = code;
         this.type = type;

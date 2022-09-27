@@ -4,11 +4,19 @@ package LeonardoJeremyJSleepDN;
 public class JSleep
 {
     public static void main(String[] args){
+        Payment testRoom = new Payment(1, 1, 1, "", 1, "", "");
+        Invoice testInvoice = new Invoice(2, 2, 2, "");
+        System.out.println(testRoom.print());
+        System.out.println(testInvoice.print());
+        
+        /*
         Room test = createRoom();
         System.out.println(test.name);
         System.out.println(test.size);
         System.out.println(test.price.price);
         System.out.println(test.facility);
+        */
+       
         /*
         System.out.println("Hotel ID   : " + getHotelID());
         System.out.println("Hotel Name : " + getHotelName());
@@ -29,11 +37,13 @@ public class JSleep
         */
     }
     
+    /*
     public static Room createRoom() {
         Price price = new Price (100000, 5);
         Room kamar1 = new Room("Hotel 1", 30, price, Facility.AC);
         return kamar1;
     }
+    */
     
     /*
     public static int getHotelID(){
