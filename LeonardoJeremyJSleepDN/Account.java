@@ -11,4 +11,8 @@ public class Account extends Serializable
     public String name;
     public String email;
     public String password;
+    
+    public String toString(){
+        return ("ID : " + id + "\nName : " + name + "\nEmail : " + email + "\nPassword : " + password);
+    }
 }
