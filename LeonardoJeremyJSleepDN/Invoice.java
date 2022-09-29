@@ -24,10 +24,8 @@ public class Invoice extends Serializable
     
     public Invoice (int id, Account buyer, Renter renter, String time) {
         super(id);
-        this.buyerId = buyer.id;
+        this.buyerId = buyer.id; 
         this.renterId = renter.id;
-        this.buyerId = buyerId;
-        this.renterId = renterId;
         this.time = time;
         this.rating = RoomRating.NONE;
         this.status = PaymentStatus.WAITING;
