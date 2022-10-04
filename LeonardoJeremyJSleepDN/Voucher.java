@@ -1,6 +1,6 @@
 package LeonardoJeremyJSleepDN;
 
-public class Voucher extends Serializable
+public class Voucher extends Serializable implements FileParser
 {
     public Voucher(int id, String name, int code, Type type, boolean used, double minimum, double cut){
         super(id);
@@ -42,5 +42,13 @@ public class Voucher extends Serializable
     
     public boolean isUsed(){
         return this.used;
+    }
+    
+    public Object write(){
+        return null;
+    }
+    
+    public boolean read(String content){
+        return false;
     }
 }
