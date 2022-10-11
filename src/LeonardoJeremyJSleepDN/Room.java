@@ -14,14 +14,14 @@ public class Room extends Serializable implements FileParser
     public ArrayList<Date> booked;
     
     
-    public Room (int id, String name, int size, Price price, Facility facility, City city, String address) {
-        super(id);
+    public Room (String name, int size, Price price, Facility facility, City city, String address) {
         this.size = size;
         this.name = name;
         this.facility = facility;
         this.price = price;
         this.city = city;
         this.address = address;
+        this.bedType = BedType.QUEEN;
     }
     
     public String toString (){
