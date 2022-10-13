@@ -4,20 +4,26 @@ public class Serializable
 {
     public final int id;
     private static HashMap<Class<?>, Integer> mapCounter;
-    public Serializable (int id){
-        if (mapCounter.get(getClass()) != null){
-            this.id = (mapCounter.get(getClass()) + 1);
+    protected Serializable() {
+        if (mapCounter == null) {
+            mapCounter = new HashMap<Class<?>, Integer>();
+        }
+        Class<?> cls = this.getClass();
+        if (mapCounter.containsKey(cls)) {
+            int count = mapCounter.get(cls);
+            mapCounter.put(cls, count + 1);
         }
         else {
-            this.id = 0;
+            mapCounter.put(cls, 1);
         }
+        this.id = mapCounter.get(cls);
     }
 
     public Integer setClosingId(Class<?> key, int value){
         return mapCounter.put(key, value);
     }
 
-    public Integer getClosingid(Class<?> key){
+    public Integer getClosingId(Class<?> key){
         return mapCounter.get(key);
     }
 
@@ -27,20 +33,10 @@ public class Serializable
     }
 
     public boolean equals(Object comp){
-        if((((Serializable)comp).id == this.id) && (comp instanceof Serializable)){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return ((Serializable) comp).id == this.id;
     }
 
     public boolean equals(Serializable comp) {
-        if (this.id == comp.id){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.id == comp.id;
     }
 }

@@ -1,8 +1,73 @@
 package LeonardoJeremyJSleepDN;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class Algorithm {
+
+    public static <T> List<T> collect(Iterable<T> iterable, T value){
+        List<T> list = new ArrayList<>();
+        for (T next : iterable) {
+            if (next.equals(value)) {
+                list.add(next);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> collect(Iterable<T> iterable, Predicate<T> predicate){
+        List<T> list = new ArrayList<>();
+        for (T next : iterable) {
+            if (predicate.predicate(next)) {
+                list.add(next);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> collect(T[] array, T value){
+        List<T> list = new ArrayList<>();
+        for (T t : array){
+            if (t.equals(value)){
+                list.add(t);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> collect(Iterator<T> iterator, T value){
+        List<T> list = new ArrayList<>();
+        while (iterator.hasNext()){
+            T next = iterator.next();
+            if (next.equals(value)){
+                list.add(next);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> collect(T[] array, Predicate<T> predicate){
+        List<T> list = new ArrayList<>();
+        for (T t : array){
+            if (predicate.predicate(t)){
+                list.add(t);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> collect(Iterator<T> iterator, Predicate<T> predicate){
+        List<T> list = new ArrayList<>();
+        while (iterator.hasNext()){
+            T next = iterator.next();
+            if (predicate.predicate(next)){
+                list.add(next);
+            }
+        }
+        return list;
+    }
+
     public static <T> int count(Iterator<T> iterator, T value){
         int count = 0;
         while(iterator.hasNext() == true){
@@ -150,6 +215,36 @@ public class Algorithm {
             }
         }
         return null;
+    }
+
+    public static <T> List<T> paginate (T[] array, int start, int end, Predicate<T> predicate){
+        List<T> list = new ArrayList<>();
+        for(int i = 0; i < array.length; i++){
+            if(predicate.predicate(array[i])){
+                list.add(array[i]);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> paginate (Iterator<T> iterator, int start, int end, Predicate<T> predicate){
+        List<T> list = new ArrayList<>();
+        for(int i = start; i < end; i++){
+            if(predicate.predicate(iterator.next())){
+                list.add(iterator.next());
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> paginate (Iterable<T> iterable, int start, int end, Predicate<T> predicate){
+        List<T> list = new ArrayList<>();
+        for(int i = start; i < end; i++){
+            if(predicate.predicate(iterable.iterator().next())){
+                list.add(iterable.iterator().next());
+            }
+        }
+        return list;
     }
 
 }

@@ -22,6 +22,7 @@ public class Room extends Serializable implements FileParser
         this.city = city;
         this.address = address;
         this.bedType = BedType.QUEEN;
+        this.booked = new ArrayList<Date>();
     }
     
     public String toString (){
