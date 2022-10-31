@@ -1,5 +1,5 @@
 package LeonardoJeremyJSleepDN;
 
 public interface Predicate<T> {
-    public boolean predicate(T Thing);
+    public abstract boolean predicate(T arg);
 }

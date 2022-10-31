@@ -1,42 +1,38 @@
 package LeonardoJeremyJSleepDN;
 import java.util.HashMap;
-public class Serializable
-{
+
+public class Serializable {
     public final int id;
-    private static HashMap<Class<?>, Integer> mapCounter;
+    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
+
     protected Serializable() {
-        if (mapCounter == null) {
-            mapCounter = new HashMap<Class<?>, Integer>();
+        Integer counter = mapCounter.get(getClass());
+        if (counter == null){
+            counter =  0;
         }
-        Class<?> cls = this.getClass();
-        if (mapCounter.containsKey(cls)) {
-            int count = mapCounter.get(cls);
-            mapCounter.put(cls, count + 1);
+        else{
+            counter +=1;
         }
-        else {
-            mapCounter.put(cls, 1);
-        }
-        this.id = mapCounter.get(cls);
+        mapCounter.put(getClass(), counter);
+        this.id = counter;
     }
 
-    public Integer setClosingId(Class<?> key, int value){
-        return mapCounter.put(key, value);
+    public static <T extends Serializable> Integer setClosingId(Class<T> clazz, int id) { return mapCounter.put(clazz, id); }
+
+    public static <T extends Serializable> Integer getClosingId(Class<T> clazz) { return mapCounter.get(clazz); }
+
+    public boolean equals(Object other)
+    {
+        return other instanceof Serializable && ((Serializable) other).id == id;
     }
 
-    public Integer getClosingId(Class<?> key){
-        return mapCounter.get(key);
+    public boolean equals(Serializable other)
+    {
+        return other.id == id;
     }
 
-    public int compareTo(Serializable comp) {
-        Integer newId = this.id;
-        return newId.compareTo(comp.id);
-    }
-
-    public boolean equals(Object comp){
-        return ((Serializable) comp).id == this.id;
-    }
-
-    public boolean equals(Serializable comp) {
-        return this.id == comp.id;
+    public int compareTo(Serializable other)
+    {
+        return Integer.compare(this.id, other.id);
     }
 }
