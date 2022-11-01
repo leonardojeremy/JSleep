@@ -1,21 +1,80 @@
 package LeonardoJeremyJSleepDN;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.*;
 
 public class JSleep
 {
-    class Country{
-        public String name;
-        public int population;
-        public List<String> listOfStates;
+
+
+    public static void main(String[] args)
+    {
+        Renter testRegex = new Renter("Netlab_", "081234567890", "Jl Margonda Raya");
+        Renter testRegexFail = new Renter("netlab", "081", "Jalan");
+        System.out.println(testRegex.validate());
+        System.out.println(testRegexFail.validate());
+
+        /*
+        try{
+            String filepath = "json/randomRoomList.json";
+            JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
+            List<Room> filterTableRoom = filterByCity(tableRoom, "medan", 0, 5);
+            filterTableRoom.forEach(room -> System.out.println(room.toString()));
+        }
+        catch(Throwable t){
+            t.printStackTrace();
+        }
+        
+         */
+
     }
 
-    public static void main(String[] args) throws IOException
-    {
+    public static void createRoom(){
+        Price testPrice = new Price(100000, 20000);
+        Room room = new Room(100, "Leonardo", 10, testPrice, Facility.WiFi, City.DEPOK, "Jl Margonda Raya");
+    }
+
+    public static List<Room> filterByCity(List<Room> rooms, String city, int page, int pageSize){
+        List<Room> filteredRooms = new ArrayList<>();
+        int start = page * pageSize;
+        int end = start + pageSize;
+        for(int i = start; i < end; i++){
+            Room room = rooms.get(i);
+            if(room.city.name().toLowerCase().contains(city.toLowerCase())){
+                filteredRooms.add(rooms.get(i));
+            }
+        }
+        return filteredRooms;
+    }
+
+    public static List<Room> filterByPrice(List<Room> rooms, double minPrice, double maxPrice){
+        List<Room> filteredRooms = new ArrayList<>();
+        for(int i = 0; i < rooms.size(); i++){
+            Room room = rooms.get(i);
+            if(room.price.price >= minPrice && room.price.price <= maxPrice){
+                filteredRooms.add(rooms.get(i));
+            }
+        }
+        return filteredRooms;
+    }
+
+    public static List<Room> filterByAccountId(List<Room> rooms, int accountId, int page, int pageSize){
+        List<Room> filteredRooms = new ArrayList<>();
+        int start = page * pageSize;
+        int end = start + pageSize;
+        for(int i = start; i < end; i++){
+            Room room = rooms.get(i);
+            if(room.accountId == accountId){
+                filteredRooms.add(rooms.get(i));
+            }
+        }
+        return filteredRooms;
+    }
+
+}
+
+        /*
+        // Read the file
         String filepath = "C:\\_UNI\\OOP\\_Praktikum OOP\\UNTUK PRAKTIKUM OOP\\JSleep\\src\\city.json";
         Gson gson = new Gson();
         try{
@@ -29,10 +88,7 @@ public class JSleep
         catch(IOException e){
             e.printStackTrace();
         }
-    }
-    
-
-}
+         */
         /*
         public static void main(String[] args){
         Room RoomA = JSleep.createRoom();

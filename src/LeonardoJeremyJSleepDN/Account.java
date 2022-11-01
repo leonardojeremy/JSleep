@@ -1,6 +1,6 @@
 package LeonardoJeremyJSleepDN;
 
-public class Account extends Serializable implements FileParser
+public class Account extends Serializable
 {
     public Account (int id, String name, String email, String password) {
         //super(id);

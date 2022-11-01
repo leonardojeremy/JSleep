@@ -2,5 +2,5 @@ package LeonardoJeremyJSleepDN;
 
 public enum Facility
 {
-    WiFI, Bathtub, Balcony, AC, FitnessCenter, Refrigerator, Restaurant, SwimmingPool;
+    WiFi, Bathtub, Balcony, AC, FitnessCenter, Refrigerator, Restaurant, SwimmingPool;
 }
