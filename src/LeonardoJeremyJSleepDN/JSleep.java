@@ -14,24 +14,28 @@ public class JSleep
         System.out.println(testRegex.validate());
         System.out.println(testRegexFail.validate());
 
-        /*
+
         try{
             String filepath = "json/randomRoomList.json";
             JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
-            List<Room> filterTableRoom = filterByCity(tableRoom, "medan", 0, 5);
+            List<Room> filterTableRoom = filterByPrice(tableRoom, 100000, 250000);
             filterTableRoom.forEach(room -> System.out.println(room.toString()));
         }
         catch(Throwable t){
             t.printStackTrace();
         }
-        
-         */
+
+        for(int i = 0; i < 5;i++){
+            ThreadingObject thread = new ThreadingObject("Thread " + i);
+        }
+
 
     }
 
-    public static void createRoom(){
+    public static Room createRoom(){
         Price testPrice = new Price(100000, 20000);
         Room room = new Room(100, "Leonardo", 10, testPrice, Facility.WiFi, City.DEPOK, "Jl Margonda Raya");
+        return room;
     }
 
     public static List<Room> filterByCity(List<Room> rooms, String city, int page, int pageSize){
