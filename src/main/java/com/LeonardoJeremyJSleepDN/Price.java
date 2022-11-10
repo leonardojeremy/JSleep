@@ -3,7 +3,7 @@ package com.LeonardoJeremyJSleepDN;
 
 public class Price
 {
-    public double price;
+    public int price;
     public double discount;
     
     /*
@@ -13,13 +13,13 @@ public class Price
     */
    
     public Price(double price) {
-        this.price = price;
+        this.price = (int)price;
         this.discount = 0;
         //this.rebate = 0.0;
     }
     
     public Price(double price, double discount) {
-        this.price = price;
+        this.price = (int)price;
         this.discount = discount;
         //this.rebate = 0.0;
     }

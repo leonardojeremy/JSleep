@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public class PaymentController implements BasicGetController<Payment> {
-    @JsonAutowired(value = Payment.class, filepath = "C:\\_UNI\\OOP\\_Praktikum OOP\\UNTUK PRAKTIKUM OOP\\JSleep\\src\\main\\java\\com\\LeonardoJeremyJSleepDN\\dbjson\\JsonAutowired.java")
+    @JsonAutowired(value = Payment.class, filepath = "C:\\_UNI\\OOP\\_Praktikum OOP\\UNTUK PRAKTIKUM OOP\\JSleep\\json\\account.json")
     public JsonTable<Payment> paymentTable;
 
-    @PostMapping("/{id}")
+    @PostMapping("/payment/{id}")
     public boolean cancel(int id){
         Payment payment = (Payment) Algorithm.<Payment>find(paymentTable, pred->pred.id == id);
         if(payment != null){
@@ -27,7 +27,7 @@ public class PaymentController implements BasicGetController<Payment> {
         return paymentTable;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/payment/create")
     public Payment create(
             @RequestParam int buyerId,
             @RequestParam int renterId,
@@ -38,13 +38,8 @@ public class PaymentController implements BasicGetController<Payment> {
         return null;
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/payment/{id}")
     public boolean accept(int id){
-        return false;
-    }
-
-    @PostMapping("/{id}")
-    public boolean submit(int id){
         return false;
     }
 

@@ -1,8 +1,5 @@
 package com.LeonardoJeremyJSleepDN;
-import com.LeonardoJeremyJSleepDN.BedType;
-import com.LeonardoJeremyJSleepDN.City;
-import com.LeonardoJeremyJSleepDN.Facility;
-import com.LeonardoJeremyJSleepDN.Price;
+import com.LeonardoJeremyJSleepDN.dbjson.JsonTable;
 import com.LeonardoJeremyJSleepDN.dbjson.Serializable;
 
 import java.util.ArrayList;
@@ -10,6 +7,7 @@ import java.util.Date;
 
 public class Room extends Serializable
 {
+    public static JsonTable<Room> jsonTable;
     public int size;
     public String name;
     public Facility facility;
@@ -22,11 +20,11 @@ public class Room extends Serializable
 
     
     
-    public Room (int accountId, String name, int size, Price price, Facility facility, City city, String address) {
+    public Room (int accountId, String name, int size, int price, Facility facility, City city, String address) {
         this.size = size;
         this.name = name;
         this.facility = facility;
-        this.price = price;
+        this.price.price = price;
         this.city = city;
         this.address = address;
         this.bedType = BedType.QUEEN;

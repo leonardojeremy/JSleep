@@ -43,7 +43,7 @@ public class JSleep
 
     public static Room createRoom(){
         Price testPrice = new Price(100000, 20000);
-        Room room = new Room(100, "Leonardo", 10, testPrice, Facility.WiFi, City.DEPOK, "Jl Margonda Raya");
+        Room room = new Room(100, "Leonardo", 10, testPrice.price, Facility.WiFi, City.DEPOK, "Jl Margonda Raya");
         return room;
     }
 

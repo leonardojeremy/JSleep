@@ -32,13 +32,13 @@ public class Payment extends Invoice {
 
     public static boolean makeBooking(Date from, Date to, Room room){
         if(availability(from, to, room)){
-            Calendar start = Calendar.getInstance();
-            start.setTime(from);
-            Calendar end = Calendar.getInstance();
-            end.setTime(to);
-            for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-                room.booked.add(date);
-            }
+//            Calendar start = Calendar.getInstance();
+//            start.setTime(from);
+//            Calendar end = Calendar.getInstance();
+//            end.setTime(to);
+//            for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+//                room.booked.add(date);
+//            }
             return true;
         }
         return false;
@@ -46,25 +46,25 @@ public class Payment extends Invoice {
 
     public static boolean availability(Date from,Date to,Room room){
         Calendar start = Calendar.getInstance();
-        start.setTime(from);
+//        start.setTime(from);
         Calendar end = Calendar.getInstance();
-        end.setTime(to);
+//        end.setTime(to);
         if(start.after(end) || start.equals(end)){
             return false;
         }
-        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-            if(room.booked.contains(date)){
-                return false;
-            }
-        }
+//        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+//            if(room.booked.contains(date)){
+//                return false;
+//            }
+//        }
         return true;
     }
 
-    public String getTime(){
-        SimpleDateFormat SDFormat = new SimpleDateFormat("'Formatted Date' = dd MMMM yyyy");
-        String currTime = SDFormat.format(time.getTime());
-        return currTime;
-    }
+//    public String getTime(){
+//        SimpleDateFormat SDFormat = new SimpleDateFormat("'Formatted Date' = dd MMMM yyyy");
+//        String currTime = SDFormat.format(time.getTime());
+//        return currTime;
+//    }
 
     @Override
     public String print(){

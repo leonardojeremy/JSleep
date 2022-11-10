@@ -4,6 +4,8 @@ import com.LeonardoJeremyJSleepDN.dbjson.Serializable;
 
 public class Voucher extends Serializable
 {
+    public boolean isUsed;
+
     public Voucher(int id, String name, int code, Type type, boolean used, double minimum, double cut){
         //super(id);
         this.name = name;
