@@ -1,19 +1,20 @@
 package com.LeonardoJeremyJSleepDN.controller;
 
-import com.LeonardoJeremyJSleepDN.City;
-import com.LeonardoJeremyJSleepDN.Facility;
-import com.LeonardoJeremyJSleepDN.Room;
+import com.LeonardoJeremyJSleepDN.*;
 import com.LeonardoJeremyJSleepDN.dbjson.JsonAutowired;
 import com.LeonardoJeremyJSleepDN.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/room")
 public class RoomController implements BasicGetController<Room> {
 
-    @JsonAutowired(value = Room.class, filepath = "C:\\_UNI\\OOP\\_Praktikum OOP\\UNTUK PRAKTIKUM OOP\\JSleep\\json\\account.json")
+    @JsonAutowired(value = Room.class, filepath = "C:\\_UNI\\OOP\\_Praktikum OOP\\UNTUK PRAKTIKUM OOP\\JSleep\\json\\room.json")
     public static JsonTable<Room> roomTable;
 
     @PostMapping("/room/create")
@@ -26,6 +27,10 @@ public class RoomController implements BasicGetController<Room> {
             @RequestParam City city,
             @RequestParam String address
     ){
+        Account account = Algorithm.<Account>find(AccountController.accountTable, pred -> pred.id == accountId && pred.renter != null);
+        if(account == null){
+            return null;
+        }
         Room room = new Room(accountId, name, size, price, facility, city, address);
         roomTable.add(room);
         return room;
@@ -37,7 +42,7 @@ public class RoomController implements BasicGetController<Room> {
             @RequestParam int page,
             @RequestParam int pageSize
     ) {
-        return roomTable;
+        return Algorithm.<Room>paginate(getJsonTable(), page, pageSize, pred -> pred.accountId == id);
     }
 
     @RequestMapping("/room")

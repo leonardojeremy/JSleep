@@ -23,7 +23,7 @@ public class Price
         this.discount = discount;
         //this.rebate = 0.0;
     }
-    
+
     public String toString(){
         return ("Price : " + price + "\nDiscount : " + discount);
     }

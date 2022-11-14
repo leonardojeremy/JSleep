@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 public interface BasicGetController <T extends Serializable>{
-    @GetMapping("/{id}")
+    @GetMapping("/page")
     public default List<T> getPage(
             @RequestParam int page,
             @RequestParam int pageSize
@@ -28,7 +28,6 @@ public interface BasicGetController <T extends Serializable>{
     }
 
     public abstract JsonTable<T> getJsonTable();
-
 
 
 }

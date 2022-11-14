@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.regex.Pattern;
 
+import static com.LeonardoJeremyJSleepDN.Algorithm.find;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 
@@ -31,10 +32,13 @@ public class AccountController implements BasicGetController<Account>
             @PathVariable int id,
             @RequestParam double balance
     ){
-        Account account = getById(id);
-        if (account == null) return false;
-        account.balance += balance;
-        return true;
+        Account account = Algorithm.<Account>find(accountTable, acc -> id == acc.id);
+        if (account != null){
+            account.balance += balance;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @PostMapping("/register")
@@ -46,9 +50,12 @@ public class AccountController implements BasicGetController<Account>
             )
     {
 
-        if(isBlank(name) && REGEX_PATTERN_EMAIL.matcher(email).matches() && REGEX_PATTERN_PASSWORD.matcher(password).matches()){
+        if(!isBlank(name) && REGEX_PATTERN_EMAIL.matcher(email).find() && REGEX_PATTERN_PASSWORD.matcher(password).find()){
             //Password Hashing
             String generatedPassword = null;
+            boolean emailstatus = REGEX_PATTERN_EMAIL.matcher(email).find();
+            boolean passwordstatus = REGEX_PATTERN_PASSWORD.matcher(password).find();
+
             try{
                 //Message Digest instance for MD5
                 MessageDigest md = MessageDigest.getInstance("MD5");
@@ -101,18 +108,25 @@ public class AccountController implements BasicGetController<Account>
         }catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         }
-        return (Account) Algorithm.find((Iterable<Account>) accountTable, (Predicate<Account>) pred->pred.email.equals(email) && pred.password.equals(password));
+
+        String finalGeneratedPassword = generatedPassword;
+        return Algorithm.<Account>find(accountTable, pred -> email.equals(pred.email) && finalGeneratedPassword.equals(pred.password));
     }
 
     @PostMapping("/{id}/registerRenter")
     public Renter registerRenter(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam String password
+            @PathVariable int id,
+            @RequestParam String username,
+            @RequestParam String address,
+            @RequestParam String phoneNumber
     ){
-        if(isBlank(name) && REGEX_PATTERN_EMAIL.matcher(email).matches() && REGEX_PATTERN_PASSWORD.matcher(password).matches()){
-            return new Renter(name, email, password);
+        Account temp = Algorithm.<Account>find(accountTable,pred -> pred.id == id);
+        if(temp.renter == null && temp != null){
+            temp.renter = new Renter(username, address, phoneNumber);
+            return temp.renter;
         }
-        else return null;
+        else{
+            return null;
+        }
     }
 }
