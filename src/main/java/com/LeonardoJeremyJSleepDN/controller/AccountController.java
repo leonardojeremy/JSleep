@@ -19,8 +19,8 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account>
 {
-    public static final String REGEX_PASSWORD = "^[A-Za-z0-9_]{4,20}$";
-    public static final String REGEX_EMAIL = "^[A-Za-z0-9_]{4,20}@[A-Za-z0-9_]{4,20}\\.[A-Za-z0-9_]{2,3}$";
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9 ][a-zA-Z0-9]+@[a-zA-Z.]+?\\.[a-zA-Z]+?$";
     public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
     public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
     @JsonAutowired(value = JsonTable.class, filepath = "C:\\_UNI\\OOP\\_Praktikum OOP\\UNTUK PRAKTIKUM OOP\\JSleep\\json\\account.json")
