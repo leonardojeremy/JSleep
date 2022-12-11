@@ -3,10 +3,7 @@ package com.LeonardoJeremyJSleepDN.controller;
 import com.LeonardoJeremyJSleepDN.*;
 import com.LeonardoJeremyJSleepDN.dbjson.JsonAutowired;
 import com.LeonardoJeremyJSleepDN.dbjson.JsonTable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,6 +41,16 @@ public class RoomController implements BasicGetController<Room> {
     ) {
         return Algorithm.<Room>paginate(getJsonTable(), page, pageSize, pred -> pred.accountId == id);
     }
+
+    @GetMapping("/getAllRoom")
+    public List<Room> getAllRoom(
+            @RequestParam int page,
+            @RequestParam int pageSize
+
+    ) {
+        return Algorithm.<Room>paginate(getJsonTable(), page, pageSize, pred -> true);
+    }
+
 
     @RequestMapping("/room")
     @Override

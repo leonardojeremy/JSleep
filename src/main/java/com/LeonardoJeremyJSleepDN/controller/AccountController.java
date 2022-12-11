@@ -74,7 +74,7 @@ public class AccountController implements BasicGetController<Account>
                 e.printStackTrace();
             }
             accountTable.add(new Account(name, email, generatedPassword));
-            return new Account(name, email, password);
+            return new Account(name, email, generatedPassword);
         }
         else return null;
     }
@@ -129,4 +129,10 @@ public class AccountController implements BasicGetController<Account>
             return null;
         }
     }
+
+    @GetMapping
+    String index(){
+        return "Hello World";
+    }
+
 }
